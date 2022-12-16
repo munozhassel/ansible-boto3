@@ -1,0 +1,14 @@
+---
+- name: checking service status
+  hosts: "{{ variable_host}}"
+  tasks:
+  - name: checking service status
+    command: systemctl status "{{ item }}"
+    with_items:
+    - nginx
+    - sshd
+    register: result
+    ignore_errors: yes
+  - name: showing report
+    debug:
+     var: result
